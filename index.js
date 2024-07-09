@@ -21,12 +21,11 @@ inputWrapper.appendChild(dropdownWrapper);
 
 const dropdown = document.createElement("ul");
 dropdown.classList.add("wrapper__dropdown");
-dropdownWrapper.appendChild(dropdown);
+dropdownWrapper.appendChild(dropdown); 
 
 const repoList = document.createElement("div");
 repoList.classList.add("wrapper__repo-list");
 content.appendChild(repoList);
-
 
 function debounce(fn, ms) {
   let timeout;
@@ -41,43 +40,40 @@ function debounce(fn, ms) {
   };
 }
 
-// async function searchRepos(event) {
-//   input.value = input.value.trim();
-//   const query = event.target.value;
-//   const response = await fetch(`https://api.github.com/search/repositories?q=${query}&per_page=5`);
-//   const data = await response.json();
-//   console.log(data);
-// }
-
-//поиск по апи
-const searchRepos=debounce(async(query)=>{
-  try {
-    const response=await fetch(`https://api.github.com/search/repositories?q=${query}`)
-    const data = await response.json()
-    console.log('data: ', data);
-    updateDropdown(data.items.slice(0, 5))//сюда добавить и вызвать ф-ю, раскрывающая список+ограничить вхождения до 5 парам(.slice(0, 5))
-  } catch (error) {
-    console.error('Error fetching repositories:', error)
+const searchRepos = debounce(async (query) => {
+  // console.log("🚀 ~ searchRepos ~ query:", query)
+  if(query.length > 0){
+    try {
+      const response = await fetch(
+        `https://api.github.com/search/repositories?q=${query}`
+      );
+      const data = await response.json();
+      // console.log("data.items: ", data.items);
+      updateDropdown(data.items); 
+    } catch (error) {
+      console.error("Error fetching repositories:", error);
+    }
+  }else{
+    updateDropdown([]); 
   }
+}, 500);
 
-},500)
-
-function updateDropdown(repos){
-  dropdown.innerHTML = ''
-  repos.forEach(repo => {
-    const repoItem = document.createElement("li")
-    console.log('repoItem: ', repoItem);
-    repoItem.classList.add("wrapper__dropdown-item")
-    repoItem.textContent = repo.name
-  })
+function updateDropdown(repos) {
+  console.log("repos: ", repos);
+  dropdown.innerHTML = "";
+  repos.slice(0,5).forEach((repo) => {
+    const repoItem = document.createElement("li");
+    repoItem.classList.add("wrapper__dropdown-item");
+    repoItem.textContent = repo.name;
+    //repoItem.addEventListener("click", () => (функцию, для добавления репозитория в список(wrapper__repo-item))
+    dropdown.appendChild(repoItem);
+  });
 }
+//функцию, для добавления репозитория в список(wrapper__repo-item)
 
 input.addEventListener("input", (event) => {
   const query = event.target.value;
   searchRepos(query);
+  
 });
 
-// const res = fetch('https://jsonplaceholder.typicode.com/todos/1')
-// .then(response => response.json())
-// .then(json => console.log(json))
-// console.log('res: ', res);
