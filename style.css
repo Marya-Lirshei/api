@@ -13,7 +13,7 @@ body {
   width: 661px;
   min-height: 763px;
   height: auto;
-  background-color: #d8d6d6;
+  background-color: #C4C4C4;
   margin: 90px auto;
   padding: 62px 80px;
   box-shadow: 0px 2px 2px;
@@ -36,13 +36,12 @@ body {
   padding: 10px;
 }
 
-/* .wrapper__dropdown-wrapper{
-  
-} */
-/* 
 .wrapper__dropdown{
+  position: absolute;
+  width: 500px;
+  z-index: 1;
   
-} */
+}
 
 .wrapper__dropdown-item{
   background-color: #E3E3E3;
@@ -52,10 +51,37 @@ body {
   padding: 0 0 9px 15px;
   list-style-type: none;
   cursor: pointer;
-
 }
 
-/* .wrapper__repo-list{
+.wrapper__dropdown-item:hover{
+  background-color: #65cdf9;
+}
 
-} */
+.wrapper__repo-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
+  font-size: 23px;
+  background-color: #E27BEB;
+  height: 101px;
+  border: 1px solid grey;
+}
 
+.wrapper__repo-delete{
+  background-image: url(/icons/delete_cross_z4bam9qlk88q.svg);
+  position: absolute;
+  background-color: transparent;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: none;
+  width: 53px;
+  height: 54px;
+  right: 35px;
+  border-radius: 50%;
+  transition: border-radius 1s;
+}
+
+.wrapper__repo-delete:hover {
+  border-radius: 0%;
+}
