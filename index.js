@@ -41,7 +41,6 @@ function debounce(fn, ms) {
 }
 
 const searchRepos = debounce(async (query) => {
-  console.log("🐯 ~ searchRepos ~ query:", query)
   if(query.length > 0 ){
     try {
       const response = await fetch(
@@ -58,7 +57,6 @@ const searchRepos = debounce(async (query) => {
 }, 500);
 
 function updateDropdown(repos) {
-  console.log("🐯 ~ updateDropdown ~ repos:", repos)
   dropdown.innerHTML = "";
   repos.forEach((repo) => {
     const repoItem = document.createElement("li");
@@ -103,6 +101,5 @@ function addRepoToList(repo){
 input.addEventListener("input", (event) => {
   const query = event.target.value;
   searchRepos(query);
-  
 });
 
