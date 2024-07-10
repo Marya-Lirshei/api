@@ -68,8 +68,12 @@ body {
   border: 1px solid grey;
 }
 
+/* .wrapper__repo-list{
+
+} */
+
 .wrapper__repo-delete{
-  background-image: url(/api/icons/delete_cross_z4bam9qlk88q.svg);
+  background-image: url(./icons/delete_cross_z4bam9qlk88q.svg);
   position: absolute;
   background-color: transparent;
   transition-duration: 0.4s;
